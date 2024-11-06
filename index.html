@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+        .main-container{
+            width: 400px;
+            height: 530px;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        .sub-container{
+            display: flex;
+            margin: 20px;
+
+        }
+        .pizza,.kphb{
+            margin: 0px;
+            margin-top: 4px;
+            padding-left: 12px;
+        }
+        .box{
+            border: 1px solid;
+            width: 80px;
+            height: 25px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .items{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .bill{
+            display: flex;
+            justify-content: space-around;
+        }
+        .total{
+            display: flex;
+            justify-content: space-around;
+        }
+        button{
+            border-radius: 10px;
+            width: 90px;
+            height: 40px;
+            background-color: rgb(218, 103, 32);
+            transform: translateX(180%);
+            font-size: 1rem;
+            border: 0px;
+
+        }
+        button:focus-within{
+            background-color: white;
+            border: 1px solid;
+        }
+        #grand_total{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="sub-container">
+            <div class="img-cont">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20230902/pngtree-various-fast-food-items-including-chicken-and-pizza-image_13158922.jpg" width="100px" alt="">
+            </div>
+            <div class="title">
+                <h2 class="pizza">Pizza Hut</h2>
+                <p class="kphb">KPHB,Hyderabad</p>
+            </div>
+        </div>
+        <div class="items">
+            <h3>Chicken Pizza</h3>
+            <div class="box">
+                <p style="cursor: pointer;" onclick="negativeBtn()">-</p>
+                <p id="itemsCart">0</p>
+                <p style="cursor: pointer;" onclick="positiveBtn()">+</p>
+            </div>
+            <p id="price">0</p>
+        </div>
+        <h4 style="margin-left: 25px;">Bill Details  </h4>
+        <div class="bill">
+            <div class="bill-items">
+                <p>Item Totals</p>
+                <p>Delivery Partner Fee </p>
+                <p>Platform Fee </p>
+                <p>GST & Restaurant Charges</p>
+            </div>
+            <div class="bill-price">
+                <p id="item-total">0</p>
+                <p id="Delivery">46</p>
+                <p id="platform">25</p>
+                <p id="gst">0</p>
+            </div>
+        </div>
+        <hr style="width: 350px;">
+        <div class="total">
+            <h4>Grand Total</h4>
+            <p id="grand_total">0</p>
+        </div>
+        <button onclick="submission()">submit</button>
+    </div>
+    <script>
+        let itemsCart=document.getElementById("itemsCart");
+        let price=document.getElementById("price");
+        let item_total=document.getElementById("item-total");
+        let gst=document.getElementById("gst");
+        let Delivery=document.getElementById("Delivery");
+        let platform=document.getElementById("platform");
+        let grand_total=document.getElementById("grand_total");
+        function negativeBtn(){
+            let count=Number(itemsCart.innerText)-1
+            if(itemsCart.innerText>0){
+            itemsCart.innerHTML=count;
+            let actualPrice=Number(price.innerText)-220;
+            price.innerText=actualPrice;
+
+            let count1=Number(item_total.innerText)-220;
+            item_total.innerText=count1;
+
+            let count2=count1*18/100;
+            gst.innerText=count2;
+
+            let grand_total1=count+actualPrice+count1+count2;
+            grand_total.innerText=grand_total1;
+            }
+        }
+        function positiveBtn(){
+            let count=Number(itemsCart.innerText)+1
+            itemsCart.innerHTML=count;
+            let actualPrice=Number(price.innerText)+220;
+            price.innerText=actualPrice;
+
+            let count1=Number(item_total.innerText)+220;
+            item_total.innerText=count1;
+
+            let count2=count1*18/100;
+            gst.innerText=count2;
+
+            let grand_total1=count+actualPrice+count1+count2;
+            grand_total.innerText=grand_total1;
+
+        }
+        function submission(){
+            let value=grand_total.innerText;
+            if(value==0){
+                alert("please add items to your cart");
+            }
+            else{
+                alert("Your order is placed successfully");
+            }
+        }
+    </script>
+</body>
+</html>
